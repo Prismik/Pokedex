@@ -54,15 +54,6 @@ class Http {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
 
-        let token: String?
-        if let storedToken = LocalStorage.get(LocalStorage.authTokenKey) {
-            token = "Bearer \(storedToken)"
-        } else {
-            token = nil
-        }
-
-        request.setValue(token, forHTTPHeaderField: "Authorization")
-
         return request
     }
 

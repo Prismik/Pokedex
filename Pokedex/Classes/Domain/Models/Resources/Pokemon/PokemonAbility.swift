@@ -13,7 +13,7 @@ class PokemonAbility: Resource {
     let slot: Int
     let ability: NamedResource
 
-    init?(json: JSON) {
+    required init?(json: JSON) {
         guard let hidden = json["is_hidden"].bool else { return nil }
         guard let slot = json["slot"].int else { return nil }
         guard let ability = NamedResource(json: json["ability"]) else { return nil }

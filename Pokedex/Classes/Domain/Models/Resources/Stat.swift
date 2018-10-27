@@ -9,7 +9,7 @@
 import SwiftyJSON
 
 class Stat: Resource {
-    init?(json: JSON) {
+    required init?(json: JSON) {
         return nil
     }
 }

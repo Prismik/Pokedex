@@ -13,7 +13,7 @@ class PokemonStat: Resource {
     let effortValue: Int
     let stat: NamedResource
     
-    init?(json: JSON) {
+    required init?(json: JSON) {
         guard let value = json["base_stat"].int else { return nil }
         guard let effort = json["effort"].int else { return nil }
         guard let stat = NamedResource(json: json["stat"]) else { return nil }

@@ -12,7 +12,7 @@ class NamedResource: Resource {
     let name: String
     let url: String
 
-    init?(json: JSON) {
+    required init?(json: JSON) {
         guard let name = json["name"].string else { return nil }
         guard let url = json["name"].string else { return nil }
 

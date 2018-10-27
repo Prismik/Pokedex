@@ -17,7 +17,7 @@ class Pokemon: Resource {
     let moves: [PokemonMove]
     let sprite: Sprite
 
-    init?(json: JSON) {
+    required init?(json: JSON) {
         guard let id = json["id"].int else { return nil }
         guard let name = json["name"].string else { return nil }
         guard let baseXp = json["base_experience"].int else { return nil }

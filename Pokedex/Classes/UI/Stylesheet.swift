@@ -6,7 +6,7 @@
 //  Copyright © 2018 Francis Beauchamp. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Stylesheet {
     static let margin: CGFloat = 10

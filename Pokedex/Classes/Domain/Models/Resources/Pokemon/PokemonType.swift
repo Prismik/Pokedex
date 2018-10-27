@@ -12,7 +12,7 @@ class PokemonType: Resource {
     let slot: Int
     let type: NamedResource
 
-    init?(json: JSON) {
+    required init?(json: JSON) {
         guard let slot = json["slot"].int else { return nil }
         guard let type = NamedResource(json: json["name"]) else { return nil }
         

@@ -14,7 +14,7 @@ class Sprite: Resource {
     let backImageUrl: String?
     let backShinyImageUrl: String?
 
-    init(json: JSON) {
+    required init(json: JSON) {
         self.frontImageUrl = json["front_default"].string
         self.backImageUrl = json["back_default"].string
 

@@ -6,18 +6,20 @@
 //  Copyright © 2018 Francis Beauchamp. All rights reserved.
 //
 
-import UIKit
+import PinLayout
 
 class PokemonListCell: UICollectionViewCell {
-    private let name = UILabel()
+    static let reuseIdentifier = "PokemonListCellReuseIdentifier"
+
+    private let nameLabel = UILabel()
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-
+        addSubview(nameLabel)
     }
 
     func configure(name: String) {
-        self.name = name
+        self.nameLabel.text = name
         setNeedsLayout()
     }
 
@@ -25,7 +27,18 @@ class PokemonListCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        let margin = Stylesheet.margin
+        let nameLabelSize = nameLabel.sizeThatFits(CGSize(width: size.width - 2 * margin, height: size.height))
+
+        return CGSize(width: size.width, height: nameLabelSize.height + 2 * margin)
+    }
+
     override func layoutSubviews() {
-        
+        super.layoutSubviews()
+
+        let margin = Stylesheet.margin
+        let nameSize = nameLabel.sizeThatFits(CGSize(width: width - 2 * margin, height: height))
+        nameLabel.pin.left(margin).size(nameSize).vCenter()
     }
 }

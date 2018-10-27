@@ -12,7 +12,7 @@ class PokemonMove: Resource {
     let move: NamedResource
     // todo version_group_details
 
-    init?(json: JSON) {
+    required init?(json: JSON) {
         guard let move = NamedResource(json: json["move"]) else { return nil }
 
         self.move = move

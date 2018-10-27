@@ -9,7 +9,7 @@
 import SwiftyJSON
 
 class Form: Resource {
-    init?(json: JSON) {
+    required init?(json: JSON) {
         return nil
     }
 }
