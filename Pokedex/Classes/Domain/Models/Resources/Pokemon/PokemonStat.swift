@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-class PokemonStat {
+class PokemonStat: Resource {
     let baseValue: Int
     let effortValue: Int
     let stat: NamedResource

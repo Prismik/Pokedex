@@ -11,9 +11,8 @@ import SwiftyJSON
 
 class PokeApi {
     enum Endpoints: HttpEndpoint {
-        case login(email: String, password: String)
-        case logout
-        case forgotPassword(email: String)
+        case pokemon(id: Int)
+        case pokemons
         // more endpoints
         var baseUrl: String {
             return "https://pokeapi.co/api/v2/"
@@ -21,12 +20,10 @@ class PokeApi {
 
         var url: URLComponents? {
             switch self {
-            case .login:
+            case .pokemon(let id):
                 return URLComponents(string: "\(baseUrl)/login")
-            case .logout:
+            case .pokemons:
                 return URLComponents(string: "\(baseUrl)/logout")
-            case .forgotPassword:
-                return URLComponents(string: "\(baseUrl)/password/forgot")
             }
         }
 
@@ -53,7 +50,7 @@ class PokeApi {
         func parseResponse(json: JSON) -> Any? {
             switch self {
             case .login:
-                return nil
+                return 
             default:
                 return nil
             }

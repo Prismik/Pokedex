@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-class Pokemon {
+class Pokemon: Resource {
     let id: Int
     let name: String
     let baseExperience: Int

@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-class PokemonType {
+class PokemonType: Resource {
     let slot: Int
     let type: NamedResource
 

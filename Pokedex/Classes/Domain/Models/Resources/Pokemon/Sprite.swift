@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-class Sprite {
+class Sprite: Resource {
     let frontImageUrl: String?
     let frontShinyImageUrl: String?
     let backImageUrl: String?

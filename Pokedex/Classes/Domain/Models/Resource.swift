@@ -1,5 +1,5 @@
 //
-//  Move.swift
+//  Resource.swift
 //  Pokedex
 //
 //  Created by Francis Beauchamp on 2018-10-27.
@@ -8,8 +8,6 @@
 
 import SwiftyJSON
 
-class Move: Resource {
-    init?(json: JSON) {
-        return nil
-    }
+protocol Resource {
+    init?(json: JSON)
 }

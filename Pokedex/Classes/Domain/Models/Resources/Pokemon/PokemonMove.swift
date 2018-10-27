@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-class PokemonMove {
+class PokemonMove: Resource {
     let move: NamedResource
     // todo version_group_details
 

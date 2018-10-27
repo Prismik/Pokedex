@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-class NamedResource {
+class NamedResource: Resource {
     let name: String
     let url: String
 
