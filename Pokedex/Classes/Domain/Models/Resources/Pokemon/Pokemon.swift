@@ -14,7 +14,7 @@ class Pokemon {
     let baseExperience: Int
     let abilities: [PokemonAbility]
     let forms: [NamedResource]
-    let moves: [Move]
+    let moves: [PokemonMove]
     let sprite: Sprite
 
     init?(json: JSON) {
@@ -31,8 +31,8 @@ class Pokemon {
             return form == nil ? values : values + [form!]
         })
 
-        let moves: [Move] = json["moves"].arrayValue.reduce([], { (values, json) -> [Move] in
-            let move = Move(json: json)
+        let moves: [PokemonMove] = json["moves"].arrayValue.reduce([], { (values, json) -> [PokemonMove] in
+            let move = PokemonMove(json: json)
             return move == nil ? values : values + [move!]
         })
 
