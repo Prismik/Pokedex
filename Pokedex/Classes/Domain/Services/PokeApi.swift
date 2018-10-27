@@ -15,7 +15,7 @@ class PokeApi {
         case pokemons
         // more endpoints
         var baseUrl: String {
-            return "https://pokeapi.co/api/v2/"
+            return "https://pokeapi.co/api/v2"
         }
 
         var url: URLComponents? {
@@ -32,7 +32,12 @@ class PokeApi {
         }
 
         var queryData: [URLQueryItem]? {
-            return nil
+            switch self {
+            case .pokemons:
+                return [URLQueryItem(name: "limit", value: "20")]
+            default:
+                return nil
+            }
         }
 
         var bodyData: Any? {

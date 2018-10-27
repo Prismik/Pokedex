@@ -12,14 +12,16 @@ class PokemonListCell: UICollectionViewCell {
     static let reuseIdentifier = "PokemonListCellReuseIdentifier"
 
     private let nameLabel = UILabel()
+    private let imageView = UIImageView()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         addSubview(nameLabel)
     }
 
-    func configure(name: String) {
-        self.nameLabel.text = name
+    func configure(resource: NamedResource) {
+        self.nameLabel.text = resource.name
         setNeedsLayout()
     }
 

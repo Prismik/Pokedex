@@ -118,7 +118,6 @@
 		252167B52184ECDC000DF70B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				25D653802183DB130095665A /* Info.plist */,
 				25D6537B2183DB130095665A /* Assets.xcassets */,
 				25D6537D2183DB130095665A /* LaunchScreen.storyboard */,
 			);
@@ -185,6 +184,7 @@
 		25D653732183DB110095665A /* Pokedex */ = {
 			isa = PBXGroup;
 			children = (
+				25D653802183DB130095665A /* Info.plist */,
 				252167B52184ECDC000DF70B /* Resources */,
 				252167B42184ECD7000DF70B /* Classes */,
 			);

@@ -43,6 +43,7 @@ class Http {
         let sessionConfig = URLSessionConfiguration.default
         sessionConfig.timeoutIntervalForRequest = 15
         sessionConfig.timeoutIntervalForResource = 15
+        sessionConfig.requestCachePolicy = .returnCacheDataElseLoad
         session = URLSession(configuration: sessionConfig)
     }
 
@@ -131,7 +132,6 @@ class Http {
                 }
             }
         }
-
 
         executionQueue.async {
             session.dataTask(with: request, completionHandler: completionHandler).resume()

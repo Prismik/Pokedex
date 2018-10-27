@@ -12,7 +12,7 @@ class PokemonListView: UIView {
     private let collectionView: UICollectionView
     private let flowLayout = UICollectionViewFlowLayout()
 
-    private var data: [String] = []
+    private var data: [NamedResource] = []
     private let sizingCell = PokemonListCell(frame: .zero)
 
     init() {
@@ -24,17 +24,20 @@ class PokemonListView: UIView {
 
         collectionView.register(PokemonListCell.self, forCellWithReuseIdentifier: PokemonListCell.reuseIdentifier)
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
         addSubview(collectionView)
+
+        backgroundColor = .white
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(names: [String]) {
-        self.data = names
+    func configure(resources: [NamedResource]) {
+        self.data = resources
         collectionView.reloadData()
     }
 
@@ -52,14 +55,18 @@ extension PokemonListView: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonListCell.reuseIdentifier, for: indexPath) as! PokemonListCell
-        cell.configure(name: data[indexPath.item])
+        cell.configure(resource: data[indexPath.item])
         return cell
     }
 }
 
-extension PokemonListView: UICollectionViewDelegateFlowLayout {
+extension PokemonListView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // todo show details
+    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        sizingCell.configure(name: data[indexPath.item])
+        sizingCell.configure(resource: data[indexPath.item])
         let margin = Stylesheet.margin
         return sizingCell.sizeThatFits(CGSize(width: width - 2 * margin, height: .greatestFiniteMagnitude))
     }

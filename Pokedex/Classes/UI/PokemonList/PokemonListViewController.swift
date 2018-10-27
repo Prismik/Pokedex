@@ -27,6 +27,16 @@ class PokemonListViewController: UIViewController {
     override func loadView() {
         let view = PokemonListView()
         self.view = view
+        PokeApi.request(.pokemons) { [weak self] (response) in
+            guard let strongSelf = self else { return }
+            switch response {
+            case .success(let data):
+                guard let paginatedResult = data as? PaginatedResources<NamedResource> else { return }
+                strongSelf.mainView.configure(resources: paginatedResult.results)
+            case .failure:
+                break
+            }
+        }
     }
 }
 
