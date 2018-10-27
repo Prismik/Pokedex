@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class PokeApi {
     enum Endpoints: HttpEndpoint {
-        case pokemon(id: Int)
+        case pokemon(name: String)
         case pokemons
         // more endpoints
         var baseUrl: String {
@@ -20,8 +20,8 @@ class PokeApi {
 
         var url: URLComponents? {
             switch self {
-            case .pokemon(let id):
-                return URLComponents(string: "\(baseUrl)/pokemon/\(id)")
+            case .pokemon(let name):
+                return URLComponents(string: "\(baseUrl)/pokemon/\(name)")
             case .pokemons:
                 return URLComponents(string: "\(baseUrl)/pokemon")
             }

@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let window = window else { return false }
         window.makeKeyAndVisible()
         window.backgroundColor = UIColor.white
-        window.rootViewController = PokemonListViewController()
+        window.rootViewController = UINavigationController(rootViewController: PokemonListViewController())
 
         return true
     }
