@@ -1,16 +1,20 @@
 PODS:
+  - PinLayout (1.7.10)
   - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
+  - PinLayout
   - SwiftyJSON
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - PinLayout
     - SwiftyJSON
 
 SPEC CHECKSUMS:
+  PinLayout: e8e74faf770501bd6c29cad14db52acd8b2994e6
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: d997a204f545cbf9aabfe89149521fabcd6dc248
+PODFILE CHECKSUM: 7f965f4bcb4ba3ac0fcec54e324a32ef82329cc3
 
 COCOAPODS: 1.5.3

@@ -21,9 +21,9 @@ class PokeApi {
         var url: URLComponents? {
             switch self {
             case .pokemon(let id):
-                return URLComponents(string: "\(baseUrl)/login")
+                return URLComponents(string: "\(baseUrl)/pokemon/\(id)")
             case .pokemons:
-                return URLComponents(string: "\(baseUrl)/logout")
+                return URLComponents(string: "\(baseUrl)/pokemon")
             }
         }
 
@@ -49,8 +49,10 @@ class PokeApi {
 
         func parseResponse(json: JSON) -> Any? {
             switch self {
-            case .login:
-                return 
+            case .pokemon:
+                return Pokemon(json: json)
+            case .pokemons:
+                return PaginatedResources<NamedResource>(json: json)
             default:
                 return nil
             }
