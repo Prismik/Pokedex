@@ -13,7 +13,8 @@ class PokeApi {
     enum Endpoints: HttpEndpoint {
         case pokemon(name: String)
         case pokemons
-        // more endpoints
+        case species(name: String)
+
         var baseUrl: String {
             return "https://pokeapi.co/api/v2"
         }
@@ -24,6 +25,8 @@ class PokeApi {
                 return URLComponents(string: "\(baseUrl)/pokemon/\(name)")
             case .pokemons:
                 return URLComponents(string: "\(baseUrl)/pokemon")
+            case .species(let name):
+                return URLComponents(string: "\(baseUrl)/pokemon-species/\(name)")
             }
         }
 
@@ -32,12 +35,7 @@ class PokeApi {
         }
 
         var queryData: [URLQueryItem]? {
-            switch self {
-            case .pokemons:
-                return [URLQueryItem(name: "limit", value: "20")]
-            default:
-                return nil
-            }
+            return nil
         }
 
         var bodyData: Any? {
@@ -58,6 +56,8 @@ class PokeApi {
                 return Pokemon(json: json)
             case .pokemons:
                 return PaginatedResources<NamedResource>(json: json)
+            case .species:
+                return PokemonSpecies(json: json)
             default:
                 return nil
             }

@@ -16,6 +16,7 @@ class Pokemon: Resource {
     let forms: [NamedResource]
     let moves: [PokemonMove]
     let sprite: Sprite
+    let species: NamedResource
 
     required init?(json: JSON) {
         guard let id = json["id"].int else { return nil }

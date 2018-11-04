@@ -8,12 +8,12 @@
 
 import SwiftyJSON
 
-class PaginatedResources<T: Resource> {
+class PaginatedResources<T: Resource>: Resource {
     let count: Int
     let next: String?
     let previous: String?
     let results: [T]
-    init?(json: JSON) {
+    required init?(json: JSON) {
         guard let count = json["count"].int else { return nil }
         let resultItems: [T] = json["results"].arrayValue.reduce([], { (values, json) -> [T] in
             let value = T(json: json)
