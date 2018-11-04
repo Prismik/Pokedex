@@ -6,4 +6,10 @@
 //  Copyright © 2018 Francis Beauchamp. All rights reserved.
 //
 
-import Foundation
+import SwiftyJSON
+
+class Item: Resource {
+    required init?(json: JSON) {
+        return nil
+    }
+}
