@@ -44,6 +44,7 @@ class Http {
         sessionConfig.timeoutIntervalForRequest = 15
         sessionConfig.timeoutIntervalForResource = 15
         sessionConfig.requestCachePolicy = .returnCacheDataElseLoad
+
         session = URLSession(configuration: sessionConfig)
     }
 

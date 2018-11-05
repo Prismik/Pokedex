@@ -37,6 +37,8 @@ class Pokemon: Resource {
             return move == nil ? values : values + [move!]
         })
 
+        guard let species = NamedResource<PokemonSpecies>(json: json["species"]) else { return nil }
+        
         self.id = id
         self.name = name
         self.baseExperience = baseXp
@@ -44,5 +46,6 @@ class Pokemon: Resource {
         self.forms = forms
         self.moves = moves
         self.sprite = Sprite(json: json["sprites"])
+        self.species = species
     }
 }

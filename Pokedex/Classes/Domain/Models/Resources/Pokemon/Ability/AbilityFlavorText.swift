@@ -1,5 +1,5 @@
 //
-//  Ability.swift
+//  AbilityFlavorText.swift
 //  Pokedex
 //
 //  Created by Francis Beauchamp on 2018-11-04.
@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-class Ability: Resource {
+class AbilityFlavorText: Resource {
     required init?(json: JSON) {
         return nil
     }
