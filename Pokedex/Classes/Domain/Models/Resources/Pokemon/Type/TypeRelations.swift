@@ -1,5 +1,5 @@
 //
-//  ChainLink.swift
+//  TypeRelations.swift
 //  Pokedex
 //
 //  Created by Francis Beauchamp on 2018-11-04.
@@ -8,12 +8,7 @@
 
 import SwiftyJSON
 
-class ChainLink: Resource {
-    let isBaby: Bool
-    let species: NamedResource<PokemonSpecies>
-    let evolutionDetails: [EvolutionDetail]
-    let evolvesTo: [ChainLink]
-    
+class TypeRelations: Resource {
     required init?(json: JSON) {
         return nil
     }

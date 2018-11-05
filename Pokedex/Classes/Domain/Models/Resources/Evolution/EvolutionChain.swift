@@ -10,7 +10,7 @@ import SwiftyJSON
 
 class EvolutionChain: Resource {
     let id: Int
-    let babyTriggerItem: NamedResource
+    let babyTriggerItem: NamedResource<Item>
     let chain: ChainLink
     required init?(json: JSON) {
         return nil

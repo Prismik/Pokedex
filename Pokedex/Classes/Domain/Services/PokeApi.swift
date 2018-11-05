@@ -55,7 +55,7 @@ class PokeApi {
             case .pokemon:
                 return Pokemon(json: json)
             case .pokemons:
-                return PaginatedResources<NamedResource>(json: json)
+                return PaginatedResources<NamedResource<Pokemon>>(json: json)
             case .species:
                 return PokemonSpecies(json: json)
             default:

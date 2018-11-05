@@ -13,10 +13,10 @@ class Pokemon: Resource {
     let name: String
     let baseExperience: Int
     let abilities: [PokemonAbility]
-    let forms: [NamedResource]
+    let forms: [NamedResource<Form>]
     let moves: [PokemonMove]
     let sprite: Sprite
-    let species: NamedResource
+    let species: NamedResource<PokemonSpecies>
 
     required init?(json: JSON) {
         guard let id = json["id"].int else { return nil }
@@ -27,8 +27,8 @@ class Pokemon: Resource {
             return ability == nil ? values : values + [ability!]
         })
 
-        let forms: [NamedResource] = json["forms"].arrayValue.reduce([], { (values, json) -> [NamedResource] in
-            let form = NamedResource(json: json)
+        let forms: [NamedResource<Form>] = json["forms"].arrayValue.reduce([], { (values, json) -> [NamedResource<Form>] in
+            let form = NamedResource<Form>(json: json)
             return form == nil ? values : values + [form!]
         })
 

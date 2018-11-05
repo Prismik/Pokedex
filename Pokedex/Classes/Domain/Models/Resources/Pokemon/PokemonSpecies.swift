@@ -26,15 +26,15 @@ class PokemonSpecies: Resource {
     /// Initial hatch counter: one must walk 255 × (hatchCounter + 1) steps before this Pokemon's egg hatches, unless utilizing bonuses like Flame Body's.
     let hatchCounter: Int
 
-    let evolutionChain: Resource
-    let evolvesFromSpecies: NamedResource
+    let evolutionChain: UnnamedResource<EvolutionChain>
+    let evolvesFromSpecies: NamedResource<PokemonSpecies>
 
     required init?(json: JSON) {
         guard let id = json["id"].int else { return nil }
         guard let name = json["name"].string else { return nil }
         guard let order = json["order"].int else { return nil }
-        guard let chain = UnnamedResource(json: json["evolution_chain"]) else { return nil }
-        guard let evolvesFrom = NamedResource(json: json["evolves_from"]) else { return nil }
+        guard let chain = UnnamedResource<EvolutionChain>(json: json["evolution_chain"]) else { return nil }
+        guard let evolvesFrom = NamedResource<PokemonSpecies>(json: json["evolves_from"]) else { return nil }
 
         self.id = id
         self.name = name

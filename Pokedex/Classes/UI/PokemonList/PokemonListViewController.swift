@@ -34,7 +34,7 @@ class PokemonListViewController: UIViewController {
             guard let strongSelf = self else { return }
             switch response {
             case .success(let data):
-                guard let paginatedResult = data as? PaginatedResources<NamedResource> else { return }
+                guard let paginatedResult = data as? PaginatedResources<NamedResource<Pokemon>> else { return }
                 strongSelf.mainView.configure(resources: paginatedResult.results)
             case .failure:
                 break
@@ -58,7 +58,8 @@ class PokemonListViewController: UIViewController {
 }
 
 extension PokemonListViewController: PokemonListViewDelegate {
-    func fetchDetails(for resource: NamedResource, handler: @escaping (Pokemon) -> Void) {
+    func fetchDetails(for resource: NamedResource<Pokemon>, handler: @escaping (Pokemon) -> Void) {
+        resource.fetch()
         PokeApi.request(.pokemon(name: resource.name)) { (response) in
             switch response {
             case .success(let data):

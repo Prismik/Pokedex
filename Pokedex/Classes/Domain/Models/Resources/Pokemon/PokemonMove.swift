@@ -9,11 +9,11 @@
 import SwiftyJSON
 
 class PokemonMove: Resource {
-    let move: NamedResource
+    let move: NamedResource<Move>
     // todo version_group_details
 
     required init?(json: JSON) {
-        guard let move = NamedResource(json: json["move"]) else { return nil }
+        guard let move = NamedResource<Move>(json: json["move"]) else { return nil }
 
         self.move = move
     }

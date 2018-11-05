@@ -45,7 +45,7 @@ class PokemonListCell: UICollectionViewCell {
         addSubview(imageView)
     }
 
-    func configure(resource: NamedResource) {
+    func configure(resource: NamedResource<Pokemon>) {
         self.nameLabel.text = resource.name.capitalized
         setNeedsLayout()
     }

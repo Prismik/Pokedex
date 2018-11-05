@@ -10,11 +10,11 @@ import SwiftyJSON
 
 class PokemonType: Resource {
     let slot: Int
-    let type: NamedResource
+    let type: NamedResource<Type>
 
     required init?(json: JSON) {
         guard let slot = json["slot"].int else { return nil }
-        guard let type = NamedResource(json: json["name"]) else { return nil }
+        guard let type = NamedResource<Type>(json: json["type"]) else { return nil }
         
         self.slot = slot
         self.type = type

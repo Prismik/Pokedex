@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PokemonListViewDelegate: class {
-    func fetchDetails(for resource: NamedResource, handler: @escaping (_: Pokemon) -> Void)
+    func fetchDetails(for resource: NamedResource<Pokemon>, handler: @escaping (_: Pokemon) -> Void)
 }
 
 class PokemonListView: UIView {
@@ -18,7 +18,7 @@ class PokemonListView: UIView {
     private let collectionView: UICollectionView
     private let flowLayout = UICollectionViewFlowLayout()
 
-    private var data: [NamedResource] = []
+    private var data: [NamedResource<Pokemon>] = []
     private let sizingCell = PokemonListCell(frame: .zero)
 
     private(set) var layout: PokemonListCell.LayoutType = .list {
@@ -48,7 +48,7 @@ class PokemonListView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(resources: [NamedResource]) {
+    func configure(resources: [NamedResource<Pokemon>]) {
         self.data = resources
         collectionView.reloadData()
     }

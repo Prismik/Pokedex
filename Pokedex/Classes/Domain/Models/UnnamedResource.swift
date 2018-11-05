@@ -8,10 +8,26 @@
 
 import SwiftyJSON
 
-class UnnamedResource: Resource {
+class UnnamedResource<T: Resource>: Resource {
     let url: String
+    private(set) var resource: T?
+
     required init?(json: JSON) {
         guard let url = json["url"].string else { return nil }
         self.url = url
+        self.resource = nil
+    }
+
+    func fetch() {
+        guard let resourceUrl = URL(string: url) else { return }
+        Http.request(url: resourceUrl) { (response) in
+            switch response {
+            case .success(let data):
+                guard let data = data as? Data, let json = data.jsonValue else { return }
+                self.resource = T(json: json)
+            case .failure:
+                break // TODO Retry
+            }
+        }
     }
 }

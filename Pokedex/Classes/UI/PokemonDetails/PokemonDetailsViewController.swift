@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PokemonDetailsViewController: UIViewControler {
+class PokemonDetailsViewController: UIViewController {
     init() {
         
     }

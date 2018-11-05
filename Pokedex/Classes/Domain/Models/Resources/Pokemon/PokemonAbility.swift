@@ -11,15 +11,15 @@ import SwiftyJSON
 class PokemonAbility: Resource {
     let isHidden: Bool
     let slot: Int
-    let ability: NamedResource
+    let ability: [NamedResource<Ability>]
 
     required init?(json: JSON) {
         guard let hidden = json["is_hidden"].bool else { return nil }
         guard let slot = json["slot"].int else { return nil }
-        guard let ability = NamedResource(json: json["ability"]) else { return nil }
+        guard let ability = NamedResource<Ability>(json: json["ability"]) else { return nil }
 
         self.isHidden = hidden
         self.slot = slot
-        self.ability = ability
+        self.ability = [] // TODO Ability mapping
     }
 }

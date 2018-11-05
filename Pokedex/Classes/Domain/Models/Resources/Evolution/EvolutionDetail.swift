@@ -9,7 +9,7 @@
 import SwiftyJSON
 
 class EvolutionDetail: Resource {
-    let item: NamedResource
+    let item: NamedResource<Item>
     
     required init?(json: JSON) {
         return nil

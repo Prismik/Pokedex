@@ -11,12 +11,12 @@ import SwiftyJSON
 class PokemonStat: Resource {
     let baseValue: Int
     let effortValue: Int
-    let stat: NamedResource
+    let stat: NamedResource<Stat>
     
     required init?(json: JSON) {
         guard let value = json["base_stat"].int else { return nil }
         guard let effort = json["effort"].int else { return nil }
-        guard let stat = NamedResource(json: json["stat"]) else { return nil }
+        guard let stat = NamedResource<Stat>(json: json["stat"]) else { return nil }
         
         self.baseValue = value
         self.effortValue = effort
