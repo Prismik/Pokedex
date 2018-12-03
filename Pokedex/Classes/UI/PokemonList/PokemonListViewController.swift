@@ -59,15 +59,17 @@ class PokemonListViewController: UIViewController {
 
 extension PokemonListViewController: PokemonListViewDelegate {
     func fetchDetails(for resource: NamedResource<Pokemon>, handler: @escaping (Pokemon) -> Void) {
-        resource.fetch()
-        PokeApi.request(.pokemon(name: resource.name)) { (response) in
-            switch response {
-            case .success(let data):
-                guard let pokemon = data as? Pokemon else { return }
-                handler(pokemon)
-            case .failure:
-                break
-            }
-        }
+        resource.fetch().onSuccess({ (data) in
+            guard let pokemon = data as? Pokemon else { return }
+            handler(pokemon)
+        }).onFailure({ (error) in
+            print("woops")
+        })
+    }
+
+    func showSpeciesDetails(for pokemon: NamedResource<Pokemon>) {
+        guard let details = pokemon.resource else { return }
+        let viewController = PokemonDetailsViewController(pokemon: details)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

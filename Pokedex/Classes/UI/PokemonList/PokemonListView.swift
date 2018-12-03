@@ -10,6 +10,7 @@ import UIKit
 
 protocol PokemonListViewDelegate: class {
     func fetchDetails(for resource: NamedResource<Pokemon>, handler: @escaping (_: Pokemon) -> Void)
+    func showSpeciesDetails(for pokemon: NamedResource<Pokemon>)
 }
 
 class PokemonListView: UIView {
@@ -89,7 +90,7 @@ extension PokemonListView: UICollectionViewDataSource {
 
 extension PokemonListView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // todo show details
+        delegate?.showSpeciesDetails(for: data[indexPath.item])
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -17,6 +17,11 @@ class Pokemon: Resource {
     let moves: [PokemonMove]
     let sprite: Sprite
     let species: NamedResource<PokemonSpecies>
+    let types: [PokemonType]
+
+    var mainColor: UIColor? {
+        return types.last?.color
+    }
 
     required init?(json: JSON) {
         guard let id = json["id"].int else { return nil }
@@ -38,7 +43,12 @@ class Pokemon: Resource {
         })
 
         guard let species = NamedResource<PokemonSpecies>(json: json["species"]) else { return nil }
-        
+
+        let types: [PokemonType] = json["types"].arrayValue.reduce([], { (values, json) -> [PokemonType] in
+            let pokemonType = PokemonType(json: json)
+            return pokemonType == nil ? values : values + [pokemonType!]
+        })
+
         self.id = id
         self.name = name
         self.baseExperience = baseXp
@@ -47,5 +57,6 @@ class Pokemon: Resource {
         self.moves = moves
         self.sprite = Sprite(json: json["sprites"])
         self.species = species
+        self.types = types
     }
 }

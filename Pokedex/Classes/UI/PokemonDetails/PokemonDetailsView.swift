@@ -17,10 +17,12 @@ class PokemonDetailsView: UIView {
 //    let sprite: Sprite
     private let imageView = UIImageView()
     private let abilitiesView = UIView()
-    init() {
+    init(pokemon: Pokemon) {
         super.init(frame: .zero)
 
         addSubview(imageView)
+
+        backgroundColor = .white
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -27,6 +27,7 @@ class PokemonListCell: UICollectionViewCell {
 
     private let nameLabel = UILabel()
     private let imageView = UIImageView()
+    private var typeBadges: [TypeBadgeView] = []
 
     var layout: LayoutType = .list {
         didSet {
@@ -45,6 +46,14 @@ class PokemonListCell: UICollectionViewCell {
         addSubview(imageView)
     }
 
+    override func prepareForReuse() {
+        for badge in typeBadges {
+            badge.removeFromSuperview()
+        }
+
+        typeBadges.removeAll()
+    }
+
     func configure(resource: NamedResource<Pokemon>) {
         self.nameLabel.text = resource.name.capitalized
         setNeedsLayout()
@@ -53,6 +62,13 @@ class PokemonListCell: UICollectionViewCell {
     func configure(pokemon: Pokemon) {
         guard let imageUrl = pokemon.sprite.frontImageUrl else { return }
         imageView.loadImage(from: imageUrl)
+        for type in pokemon.types {
+            let badge = TypeBadgeView()
+            badge.configure(pokemonType: type)
+            typeBadges.append(badge)
+            addSubview(badge)
+        }
+
         setNeedsLayout()
     }
 
@@ -61,8 +77,8 @@ class PokemonListCell: UICollectionViewCell {
     }
 
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        let actualWidth: CGFloat = layout == .list ? size.width : 120
-        let actualHeight: CGFloat = layout == .list ? 80 : 120
+        let actualWidth: CGFloat = layout == .list ? size.width : size.width * 0.3
+        let actualHeight: CGFloat = layout == .list ? 90 : size.width * 0.3
         return CGSize(width: actualWidth, height: actualHeight)
     }
 
@@ -80,8 +96,11 @@ class PokemonListCell: UICollectionViewCell {
     private func layoutList() {
         let margin = Stylesheet.margin
         let nameSize = nameLabel.sizeThatFits(CGSize(width: width - 2 * margin, height: height))
-        nameLabel.pin.right(of: imageView).marginLeft(margin).size(nameSize).vCenter()
+        nameLabel.pin.right(of: imageView).marginLeft(margin).size(nameSize).top(margin)
         imageView.pin.left().vertically().width(height)
+        for (index, badge) in typeBadges.enumerated() {
+            badge.pin.right(of: imageView).marginLeft(margin + CGFloat(index) * (margin + badge.width)).bottom(margin)
+        }
     }
 
     private func layoutGrid() {
@@ -89,6 +108,5 @@ class PokemonListCell: UICollectionViewCell {
         let nameSize = nameLabel.sizeThatFits(CGSize(width: width - 2 * margin, height: height))
         nameLabel.pin.bottom(margin).size(nameSize)
         imageView.pin.top(margin).above(of: nameLabel).marginBottom(margin).horizontally()
-
     }
 }
