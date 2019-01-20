@@ -24,6 +24,10 @@ extension UIColor {
         self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1)
     }
 
+    static var pokedexRed: UIColor {
+        return UIColor(r: 227, g: 0, b: 39)
+    }
+
     static var normal: UIColor {
         return UIColor(r: 155, g: 155, b: 135)
     }

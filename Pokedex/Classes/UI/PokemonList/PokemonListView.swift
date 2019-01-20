@@ -16,6 +16,11 @@ protocol PokemonListViewDelegate: class {
 class PokemonListView: UIView {
     weak var delegate: PokemonListViewDelegate?
 
+    private let headerHeight: CGFloat = 15
+
+    private let headerShapeLayer = CAShapeLayer()
+    private let header = UIView()
+    private let footer = PokemonListFooter()
     private let collectionView: UICollectionView
     private let flowLayout = UICollectionViewFlowLayout()
 
@@ -42,6 +47,19 @@ class PokemonListView: UIView {
         collectionView.showsHorizontalScrollIndicator = false
         addSubview(collectionView)
 
+        headerShapeLayer.fillColor = UIColor.pokedexRed.cgColor
+        header.layer.insertSublayer(headerShapeLayer, at: 0)
+        header.layer.shadowColor = UIColor.pokedexRed.cgColor
+        header.layer.shadowOffset = CGSize(width: 0, height: 2)
+        header.layer.shadowRadius = 2
+        header.layer.shadowOpacity = 0.7
+        addSubview(header)
+
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan))
+        panGesture.maximumNumberOfTouches = 1
+        footer.addGestureRecognizer(panGesture)
+        addSubview(footer)
+
         backgroundColor = .white
     }
 
@@ -58,6 +76,9 @@ class PokemonListView: UIView {
         super.layoutSubviews()
 
         collectionView.pin.all()
+        header.pin.top().horizontally().height(headerHeight)
+        headerShapeLayer.path = makeShapePath()
+        footer.pin.bottom().horizontally().height(60)
     }
 
     func toggleLayout() {
@@ -69,6 +90,22 @@ class PokemonListView: UIView {
         }
 
         collectionView.performBatchUpdates(nil, completion: nil)
+    }
+
+    private func makeShapePath() -> CGPath {
+        let path = CGMutablePath()
+        path.move(to: .zero)
+        path.addLine(to: CGPoint(x: 0, y: headerHeight))
+        path.addLine(to: CGPoint(x: width * 0.3, y: headerHeight))
+        path.addLine(to: CGPoint(x: width * 0.35, y: 5))
+        path.addLine(to: CGPoint(x: width, y: 5))
+        path.addLine(to: CGPoint(x: width, y: 0))
+        path.closeSubpath()
+        return path
+    }
+
+    @objc private func didPan(sender: UIPanGestureRecognizer) {
+
     }
 }
 
