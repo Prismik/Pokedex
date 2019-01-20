@@ -35,6 +35,11 @@
 		25D6538A2183DD610095665A /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D653892183DD610095665A /* Pokemon.swift */; };
 		25D6538C2183E2B10095665A /* PokemonAbility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D6538B2183E2B10095665A /* PokemonAbility.swift */; };
 		25E1530D21F3A7F200245E4E /* PokemonListFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1530C21F3A7F200245E4E /* PokemonListFooter.swift */; };
+		25E1531021F4D97500245E4E /* BottomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1530F21F4D97500245E4E /* BottomMenuViewController.swift */; };
+		25E1531221F4DA0E00245E4E /* BottomMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1531121F4DA0E00245E4E /* BottomMenuView.swift */; };
+		25E1531521F4E72800245E4E /* MenuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1531421F4E72800245E4E /* MenuHelper.swift */; };
+		25E1531721F4E77300245E4E /* BottomMenuAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1531621F4E77300245E4E /* BottomMenuAnimationController.swift */; };
+		25E1531921F4E86000245E4E /* BottomMenuInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1531821F4E86000245E4E /* BottomMenuInteractor.swift */; };
 		25FD2630218BB68900083CA6 /* PokemonSpecies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FD262F218BB68900083CA6 /* PokemonSpecies.swift */; };
 		25FD2632218E0C0800083CA6 /* UnnamedResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FD2631218E0C0800083CA6 /* UnnamedResource.swift */; };
 		25FD2635218E4F4900083CA6 /* EvolutionChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FD2634218E4F4900083CA6 /* EvolutionChain.swift */; };
@@ -86,6 +91,11 @@
 		25D653892183DD610095665A /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		25D6538B2183E2B10095665A /* PokemonAbility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonAbility.swift; sourceTree = "<group>"; };
 		25E1530C21F3A7F200245E4E /* PokemonListFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListFooter.swift; sourceTree = "<group>"; };
+		25E1530F21F4D97500245E4E /* BottomMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenuViewController.swift; sourceTree = "<group>"; };
+		25E1531121F4DA0E00245E4E /* BottomMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenuView.swift; sourceTree = "<group>"; };
+		25E1531421F4E72800245E4E /* MenuHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHelper.swift; sourceTree = "<group>"; };
+		25E1531621F4E77300245E4E /* BottomMenuAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenuAnimationController.swift; sourceTree = "<group>"; };
+		25E1531821F4E86000245E4E /* BottomMenuInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenuInteractor.swift; sourceTree = "<group>"; };
 		25FD262F218BB68900083CA6 /* PokemonSpecies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonSpecies.swift; sourceTree = "<group>"; };
 		25FD2631218E0C0800083CA6 /* UnnamedResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnnamedResource.swift; sourceTree = "<group>"; };
 		25FD2634218E4F4900083CA6 /* EvolutionChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvolutionChain.swift; sourceTree = "<group>"; };
@@ -192,6 +202,7 @@
 		252167BF2184F48A000DF70B /* PokemonList */ = {
 			isa = PBXGroup;
 			children = (
+				25E1530E21F4D84000245E4E /* BottomMenu */,
 				252167C22184F564000DF70B /* Subviews */,
 				25D653762183DB110095665A /* PokemonListViewController.swift */,
 				252167BD2184F47E000DF70B /* PokemonListView.swift */,
@@ -301,6 +312,26 @@
 				25FD2631218E0C0800083CA6 /* UnnamedResource.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		25E1530E21F4D84000245E4E /* BottomMenu */ = {
+			isa = PBXGroup;
+			children = (
+				25E1531321F4E71900245E4E /* Animation */,
+				25E1530F21F4D97500245E4E /* BottomMenuViewController.swift */,
+				25E1531121F4DA0E00245E4E /* BottomMenuView.swift */,
+			);
+			path = BottomMenu;
+			sourceTree = "<group>";
+		};
+		25E1531321F4E71900245E4E /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				25E1531421F4E72800245E4E /* MenuHelper.swift */,
+				25E1531621F4E77300245E4E /* BottomMenuAnimationController.swift */,
+				25E1531821F4E86000245E4E /* BottomMenuInteractor.swift */,
+			);
+			path = Animation;
 			sourceTree = "<group>";
 		};
 		25FD2633218E4F2E00083CA6 /* Evolution */ = {
@@ -501,9 +532,11 @@
 				25FD26542190726E00083CA6 /* AsyncTask.swift in Sources */,
 				25FD263F218FA49200083CA6 /* Data+jsonValue.swift in Sources */,
 				25D653752183DB110095665A /* AppDelegate.swift in Sources */,
+				25E1531221F4DA0E00245E4E /* BottomMenuView.swift in Sources */,
 				252167C72184FA69000DF70B /* UIView+geometry.swift in Sources */,
 				25FD2635218E4F4900083CA6 /* EvolutionChain.swift in Sources */,
 				255594822184BEE400561774 /* Form.swift in Sources */,
+				25E1531721F4E77300245E4E /* BottomMenuAnimationController.swift in Sources */,
 				25FD2652218FC3B000083CA6 /* AbilityFlavorText.swift in Sources */,
 				25E1530D21F3A7F200245E4E /* PokemonListFooter.swift in Sources */,
 				25FD263D218FA0F400083CA6 /* Item.swift in Sources */,
@@ -527,8 +560,11 @@
 				255594842184C16600561774 /* Move.swift in Sources */,
 				252167B72184ED2A000DF70B /* Bootstrapper.swift in Sources */,
 				2505EB4C21B5A86800B0484C /* TypeBadgeView.swift in Sources */,
+				25E1531021F4D97500245E4E /* BottomMenuViewController.swift in Sources */,
 				25D6538A2183DD610095665A /* Pokemon.swift in Sources */,
+				25E1531921F4E86000245E4E /* BottomMenuInteractor.swift in Sources */,
 				252167B32184EB55000DF70B /* Http.swift in Sources */,
+				25E1531521F4E72800245E4E /* MenuHelper.swift in Sources */,
 				252167BE2184F47E000DF70B /* PokemonListView.swift in Sources */,
 				25FD2630218BB68900083CA6 /* PokemonSpecies.swift in Sources */,
 				252167BC2184F222000DF70B /* Resource.swift in Sources */,
