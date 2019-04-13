@@ -6,10 +6,15 @@
 //  Copyright © 2018 Francis Beauchamp. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Bootstrapper {
     func bootstrap() {
         Http.initSession()
+    }
+
+    func configure(window: UIWindow) {
+        window.makeKeyAndVisible()
+        window.backgroundColor = UIColor.white
     }
 }

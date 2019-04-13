@@ -11,6 +11,7 @@ import UIKit
 protocol PokemonListViewDelegate: class {
     func fetchDetails(for resource: NamedResource<Pokemon>, handler: @escaping (_: Pokemon) -> Void)
     func showSpeciesDetails(for pokemon: NamedResource<Pokemon>)
+    func didPan(_ progress: CGFloat, state: UIGestureRecognizerState)
 }
 
 class PokemonListView: UIView {
@@ -57,6 +58,7 @@ class PokemonListView: UIView {
 
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan))
         panGesture.maximumNumberOfTouches = 1
+        footer.isUserInteractionEnabled = true
         footer.addGestureRecognizer(panGesture)
         addSubview(footer)
 
@@ -105,7 +107,10 @@ class PokemonListView: UIView {
     }
 
     @objc private func didPan(sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: self)
+        let progress = MenuHelper.progress(translationInView: translation, viewBounds: bounds, direction: .up)
 
+        delegate?.didPan(progress, state: sender.state)
     }
 }
 

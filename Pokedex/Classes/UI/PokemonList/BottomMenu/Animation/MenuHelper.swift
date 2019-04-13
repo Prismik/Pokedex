@@ -38,6 +38,7 @@ struct MenuHelper {
         case .right, .up: // positive
             positiveMovementOnAxis = fmaxf(Float(movementOnAxis), 0.0)
             positiveMovementOnAxisPercent = fminf(positiveMovementOnAxis, 1.0)
+            print("PAN POSITION => \(positiveMovementOnAxisPercent)")
             return CGFloat(positiveMovementOnAxisPercent)
         case .down, .left: // negative
             positiveMovementOnAxis = fminf(Float(movementOnAxis), 0.0)

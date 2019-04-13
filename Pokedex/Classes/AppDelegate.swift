@@ -12,15 +12,15 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     private let bootstrapper = Bootstrapper()
+    private let rootFlowCoordinator = RootFlowCoordinator()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         bootstrapper.bootstrap()
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         guard let window = window else { return false }
-        window.makeKeyAndVisible()
-        window.backgroundColor = UIColor.white
-        window.rootViewController = UINavigationController(rootViewController: PokemonListViewController())
+        bootstrapper.configure(window: window)
+        rootFlowCoordinator.start(in: window)
 
         return true
     }

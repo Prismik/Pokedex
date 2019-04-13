@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol PokemonListViewControllerDelegate: class {
+    func pokemonListViewControllerDidPresentBottomMenu(_ listViewController: PokemonListViewController)
+}
+
 class PokemonListViewController: UIViewController {
     var mainView: PokemonListView {
         return view as! PokemonListView
     }
+
+    weak var delegate: PokemonListViewControllerDelegate?
+    weak var interactor: BottomMenuInteractor?
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -42,6 +49,10 @@ class PokemonListViewController: UIViewController {
         }
     }
 
+    override func prefersHomeIndicatorAutoHidden() -> Bool {
+        return true
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -70,8 +81,14 @@ extension PokemonListViewController: PokemonListViewDelegate {
     }
 
     func showSpeciesDetails(for pokemon: NamedResource<Pokemon>) {
-        guard let details = pokemon.resource else { return }
+        guard let details = pokemon.resource else { return }
         let viewController = PokemonDetailsViewController(pokemon: details)
         navigationController?.pushViewController(viewController, animated: true)
+    }
+
+    func didPan(_ progress: CGFloat, state: UIGestureRecognizerState) {
+        MenuHelper.mapGestureStateToInteractor(gestureState: state, progress: progress, interactor: interactor, presenting: false) {
+            delegate?.pokemonListViewControllerDidPresentBottomMenu(self)
+        }
     }
 }
