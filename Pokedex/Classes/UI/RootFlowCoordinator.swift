@@ -11,6 +11,7 @@ import UIKit
 class RootFlowCoordinator: BaseFlowCoordinator {
     private let mainViewController = PokemonListViewController()
     private let interactor = BottomMenuInteractor()
+    private weak var bottomMenuViewController: BottomMenuViewController?
 
     init() {
         super.init()
@@ -26,6 +27,7 @@ class RootFlowCoordinator: BaseFlowCoordinator {
 extension RootFlowCoordinator: PokemonListViewControllerDelegate {
     func pokemonListViewControllerDidPresentBottomMenu(_ listViewController: PokemonListViewController) {
         let menuViewController = BottomMenuViewController()
+        bottomMenuViewController = menuViewController
         menuViewController.interactor = interactor
         menuViewController.delegate = self
         menuViewController.modalPresentationStyle = .custom

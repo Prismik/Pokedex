@@ -16,9 +16,8 @@ enum Direction {
 }
 
 struct MenuHelper {
-    static let menuWidth: CGFloat = 0.8
-    static let percentThreshold: CGFloat = 0.3
-    static let snapshotNumber = 12345
+    static let menuWidth: CGFloat = 0.2
+    static let percentThreshold: CGFloat = 0.15
 
     static func progress(translationInView: CGPoint, viewBounds: CGRect, direction: Direction) -> CGFloat {
         let pointOnAxis: CGFloat
@@ -35,12 +34,11 @@ struct MenuHelper {
         let positiveMovementOnAxis:Float
         let positiveMovementOnAxisPercent:Float
         switch direction {
-        case .right, .up: // positive
+        case .right, .down: // positive
             positiveMovementOnAxis = fmaxf(Float(movementOnAxis), 0.0)
             positiveMovementOnAxisPercent = fminf(positiveMovementOnAxis, 1.0)
-            print("PAN POSITION => \(positiveMovementOnAxisPercent)")
             return CGFloat(positiveMovementOnAxisPercent)
-        case .down, .left: // negative
+        case .up, .left: // negative
             positiveMovementOnAxis = fminf(Float(movementOnAxis), 0.0)
             positiveMovementOnAxisPercent = fmaxf(positiveMovementOnAxis, -1.0)
             return CGFloat(-positiveMovementOnAxisPercent)

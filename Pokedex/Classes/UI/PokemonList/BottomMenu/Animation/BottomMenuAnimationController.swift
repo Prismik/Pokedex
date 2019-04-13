@@ -57,21 +57,23 @@ extension BottomMenuAnimationController: UIViewControllerAnimatedTransitioning {
 
     private func present(from fromViewController: UIViewController, to toViewController: UIViewController, using transitionContext: UIViewControllerContextTransitioning) {
         transitionContext.containerView.insertSubview(toViewController.view, belowSubview: fromViewController.view)
-
-        fromViewController.view.isHidden = true
+        guard let navigationViewController = fromViewController as? UINavigationController else { return }
+        guard let listViewController = navigationViewController.topViewController as? PokemonListViewController else { return }
         toViewController.view.frame = UIScreen.main.bounds
-
+        let targetYPosition = listViewController.mainView.maxY * MenuHelper.menuWidth
         UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
-
+            listViewController.mainView.footer.pin.bottom(targetYPosition)
         }, completion: { _ in
-            fromViewController.view.isHidden = false
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
     }
 
     private func dismiss(from fromViewController: UIViewController, to toViewController: UIViewController, using transitionContext: UIViewControllerContextTransitioning) {
-        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+        guard let navigationViewController = fromViewController as? UINavigationController else { return }
+        guard let listViewController = navigationViewController.topViewController as? PokemonListViewController else { return }
 
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            listViewController.mainView.footer.pin.bottom(0)
         }, completion: { _ in
             let didTransitionComplete = !transitionContext.transitionWasCancelled
             transitionContext.completeTransition(didTransitionComplete)

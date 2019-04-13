@@ -21,7 +21,7 @@ class PokemonListView: UIView {
 
     private let headerShapeLayer = CAShapeLayer()
     private let header = UIView()
-    private let footer = PokemonListFooter()
+    let footer = PokemonListFooter()
     private let collectionView: UICollectionView
     private let flowLayout = UICollectionViewFlowLayout()
 
@@ -109,7 +109,6 @@ class PokemonListView: UIView {
     @objc private func didPan(sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: self)
         let progress = MenuHelper.progress(translationInView: translation, viewBounds: bounds, direction: .up)
-
         delegate?.didPan(progress, state: sender.state)
     }
 }
