@@ -12,7 +12,7 @@ class Stylesheet {
     static let margin: CGFloat = 10
 
     class FontSize {
-        static let header: CGFloat = 20
+        static let header: CGFloat = 26
         static let body: CGFloat = 16
         static let accessory: CGFloat = 14
         static let tiny: CGFloat = 12

@@ -20,12 +20,18 @@ class PokemonListViewController: UIViewController {
     weak var delegate: PokemonListViewControllerDelegate?
     weak var interactor: BottomMenuInteractor?
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
+    private var currentResult: PaginatedResources<NamedResource<Pokemon>>?
+
     init() {
         super.init(nibName: nil, bundle: nil)
 
         edgesForExtendedLayout = []
         title = "Pokemons"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Line", style: .plain, target: self, action: #selector(toggleLayout))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Line", style: .plain, target: self, action: #selector(toggleLayout))
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -39,13 +45,7 @@ class PokemonListViewController: UIViewController {
 
         PokeApi.request(.pokemons) { [weak self] (response) in
             guard let strongSelf = self else { return }
-            switch response {
-            case .success(let data):
-                guard let paginatedResult = data as? PaginatedResources<NamedResource<Pokemon>> else { return }
-                strongSelf.mainView.configure(resources: paginatedResult.results)
-            case .failure:
-                break
-            }
+            strongSelf.parse(paginatedResponse: response)
         }
     }
 
@@ -68,9 +68,28 @@ class PokemonListViewController: UIViewController {
         mainView.toggleLayout()
         navigationItem.rightBarButtonItem?.title = mainView.layout.title
     }
+
+    private func parse(paginatedResponse: Http.Response) {
+        switch paginatedResponse {
+        case .success(let data):
+            guard let paginatedResult = data as? PaginatedResources<NamedResource<Pokemon>> else { return }
+            currentResult = paginatedResult
+            mainView.configure(resources: paginatedResult.results)
+        case .failure:
+            break
+        }
+    }
 }
 
 extension PokemonListViewController: PokemonListViewDelegate {
+    func fetchNextPage() {
+        guard let currentPagination = currentResult else { return }
+        PokeApi.request(.next(offset: currentPagination.offset, limit: currentPagination.limit)) { [weak self] (response) in
+            guard let strongSelf = self else { return }
+            strongSelf.parse(paginatedResponse: response)
+        }
+    }
+
     func fetchDetails(for resource: NamedResource<Pokemon>, handler: @escaping (Pokemon) -> Void) {
         resource.fetch().onSuccess({ (data) in
             guard let pokemon = data as? Pokemon else { return }

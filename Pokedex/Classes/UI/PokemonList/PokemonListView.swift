@@ -11,6 +11,7 @@ import UIKit
 protocol PokemonListViewDelegate: class {
     func fetchDetails(for resource: NamedResource<Pokemon>, handler: @escaping (_: Pokemon) -> Void)
     func showSpeciesDetails(for pokemon: NamedResource<Pokemon>)
+    func fetchNextPage()
     func didPan(_ progress: CGFloat, state: UIGestureRecognizerState)
 }
 
@@ -71,8 +72,16 @@ class PokemonListView: UIView {
     }
 
     func configure(resources: [NamedResource<Pokemon>]) {
-        self.data = resources
-        collectionView.reloadData()
+        let insertBeginIndex = data.count
+        let insertEndIndex =  insertBeginIndex + resources.count - 1
+
+        collectionView.performBatchUpdates({
+            data.append(contentsOf: resources)
+            let insertions = (insertBeginIndex ... insertEndIndex).map({
+                IndexPath(item: $0, section: 0)
+            })
+            collectionView.insertItems(at: insertions)
+        }, completion: nil)
     }
 
     override func layoutSubviews() {
@@ -126,6 +135,11 @@ extension PokemonListView: UICollectionViewDataSource {
         delegate?.fetchDetails(for: data[indexPath.item], handler: { (pokemon) in
             cell.configure(pokemon: pokemon)
         })
+
+        if indexPath.row == data.count - 1 {
+            delegate?.fetchNextPage()
+        }
+
         return cell
     }
 }

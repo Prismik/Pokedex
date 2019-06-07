@@ -14,6 +14,7 @@ class PokeApi {
         case pokemon(name: String)
         case pokemons
         case species(name: String)
+        case next(offset: Int, limit: Int)
 
         var baseUrl: String {
             return "https://pokeapi.co/api/v2"
@@ -27,6 +28,8 @@ class PokeApi {
                 return URLComponents(string: "\(baseUrl)/pokemon")
             case .species(let name):
                 return URLComponents(string: "\(baseUrl)/pokemon-species/\(name)")
+            case .next:
+                return URLComponents(string: "\(baseUrl)/pokemon")
             }
         }
 
@@ -35,7 +38,15 @@ class PokeApi {
         }
 
         var queryData: [URLQueryItem]? {
-            return nil
+            switch self {
+            case .next(let offset, let limit):
+                return [
+                    URLQueryItem(name: "offset", value: String(offset)),
+                    URLQueryItem(name: "limit", value: String(limit))
+                ]
+            default:
+                return nil
+            }
         }
 
         var bodyData: Any? {
@@ -54,7 +65,7 @@ class PokeApi {
             switch self {
             case .pokemon:
                 return Pokemon(json: json)
-            case .pokemons:
+            case .pokemons, .next:
                 return PaginatedResources<NamedResource<Pokemon>>(json: json)
             case .species:
                 return PokemonSpecies(json: json)

@@ -10,6 +10,7 @@
 		1548438022623AC400C5D3C2 /* BaseFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548437F22623AC400C5D3C2 /* BaseFlowCoordinator.swift */; };
 		1548438222623C4700C5D3C2 /* RootFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548438122623C4700C5D3C2 /* RootFlowCoordinator.swift */; };
 		15C3DEE622AABEF000C8FF5F /* UIEdgeInsets+convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C3DEE522AABEF000C8FF5F /* UIEdgeInsets+convenience.swift */; };
+		15C3DEE822AAC34700C8FF5F /* UINavigationController+statusBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C3DEE722AAC34700C8FF5F /* UINavigationController+statusBarStyle.swift */; };
 		2505EB4C21B5A86800B0484C /* TypeBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505EB4B21B5A86800B0484C /* TypeBadgeView.swift */; };
 		252052EC2186B2C40033B178 /* PokemonDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252052EB2186B2C40033B178 /* PokemonDetailsViewController.swift */; };
 		252052EE2186B2D00033B178 /* PokemonDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252052ED2186B2D00033B178 /* PokemonDetailsView.swift */; };
@@ -67,6 +68,7 @@
 		1548437F22623AC400C5D3C2 /* BaseFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFlowCoordinator.swift; sourceTree = "<group>"; };
 		1548438122623C4700C5D3C2 /* RootFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootFlowCoordinator.swift; sourceTree = "<group>"; };
 		15C3DEE522AABEF000C8FF5F /* UIEdgeInsets+convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+convenience.swift"; sourceTree = "<group>"; };
+		15C3DEE722AAC34700C8FF5F /* UINavigationController+statusBarStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+statusBarStyle.swift"; sourceTree = "<group>"; };
 		2505EB4B21B5A86800B0484C /* TypeBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeBadgeView.swift; sourceTree = "<group>"; };
 		252052EB2186B2C40033B178 /* PokemonDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailsViewController.swift; sourceTree = "<group>"; };
 		252052ED2186B2D00033B178 /* PokemonDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailsView.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				252167C821850B22000DF70B /* UIImageView+async.swift */,
 				25FD263E218FA49200083CA6 /* Data+jsonValue.swift */,
 				15C3DEE522AABEF000C8FF5F /* UIEdgeInsets+convenience.swift */,
+				15C3DEE722AAC34700C8FF5F /* UINavigationController+statusBarStyle.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -550,6 +553,7 @@
 				1548438222623C4700C5D3C2 /* RootFlowCoordinator.swift in Sources */,
 				25FD26542190726E00083CA6 /* AsyncTask.swift in Sources */,
 				25FD263F218FA49200083CA6 /* Data+jsonValue.swift in Sources */,
+				15C3DEE822AAC34700C8FF5F /* UINavigationController+statusBarStyle.swift in Sources */,
 				25D653752183DB110095665A /* AppDelegate.swift in Sources */,
 				25E1531221F4DA0E00245E4E /* BottomMenuView.swift in Sources */,
 				252167C72184FA69000DF70B /* UIView+geometry.swift in Sources */,

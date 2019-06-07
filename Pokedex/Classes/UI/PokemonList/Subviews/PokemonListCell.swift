@@ -27,6 +27,7 @@ class PokemonListCell: UICollectionViewCell {
 
     private let nameLabel = UILabel()
     private let imageView = UIImageView()
+    private let idLabel = UILabel()
     private var typeBadges: [TypeBadgeView] = []
 
     var layout: LayoutType = .list {
@@ -44,9 +45,16 @@ class PokemonListCell: UICollectionViewCell {
 
         imageView.contentMode = .scaleAspectFit
         addSubview(imageView)
+
+        idLabel.textAlignment = .right
+        addSubview(idLabel)
     }
 
     override func prepareForReuse() {
+        clearBadges()
+    }
+
+    private func clearBadges() {
         for badge in typeBadges {
             badge.removeFromSuperview()
         }
@@ -62,6 +70,7 @@ class PokemonListCell: UICollectionViewCell {
     func configure(pokemon: Pokemon) {
         guard let imageUrl = pokemon.sprite.frontImageUrl else { return }
         imageView.loadImage(from: imageUrl)
+        clearBadges()
         for type in pokemon.types {
             let badge = TypeBadgeView()
             badge.configure(pokemonType: type)
@@ -69,6 +78,13 @@ class PokemonListCell: UICollectionViewCell {
             addSubview(badge)
         }
 
+        let attributedString = NSMutableAttributedString(string: "#", attributes: [
+            .font: UIFont.boldSystemFont(ofSize: Stylesheet.FontSize.header)
+        ])
+        attributedString.append(NSAttributedString(string: " \(pokemon.id)", attributes: [
+            .font: UIFont.boldSystemFont(ofSize: Stylesheet.FontSize.body)
+        ]))
+        idLabel.attributedText = attributedString
         setNeedsLayout()
     }
 
@@ -96,17 +112,21 @@ class PokemonListCell: UICollectionViewCell {
     private func layoutList() {
         let margin = Stylesheet.margin
         let nameSize = nameLabel.sizeThatFits(CGSize(width: width - 2 * margin, height: height))
-        nameLabel.pin.right(of: imageView).marginLeft(margin).size(nameSize).top(margin)
         imageView.pin.left().vertically().width(height)
+        nameLabel.pin.right(of: imageView).marginLeft(margin).size(nameSize).vCenter().marginBottom((nameSize.height + margin) / 2)
         for (index, badge) in typeBadges.enumerated() {
-            badge.pin.right(of: imageView).marginLeft(margin + CGFloat(index) * (margin + badge.width)).bottom(margin)
+            badge.isHidden = false
+            badge.pin.right(of: imageView).marginLeft(margin + CGFloat(index) * (margin + badge.width)).vCenter().marginTop((margin + badge.height) / 2)
         }
+
+        idLabel.pin.right(margin).right(of: typeBadges.last ?? nameLabel).marginLeft(margin).vertically()
     }
 
     private func layoutGrid() {
         let margin = Stylesheet.margin
         let nameSize = nameLabel.sizeThatFits(CGSize(width: width - 2 * margin, height: height))
-        nameLabel.pin.bottom(margin).size(nameSize)
+        nameLabel.pin.bottom(margin).size(nameSize).hCenter()
         imageView.pin.top(margin).above(of: nameLabel).marginBottom(margin).horizontally()
+        typeBadges.forEach({ $0.isHidden = false })
     }
 }

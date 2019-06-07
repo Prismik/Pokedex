@@ -13,6 +13,10 @@ class PaginatedResources<T: Resource>: Resource {
     let next: String?
     let previous: String?
     let results: [T]
+
+    private(set) var offset: Int = 0
+    let limit: Int = 20
+
     required init?(json: JSON) {
         guard let count = json["count"].int else { return nil }
         let resultItems: [T] = json["results"].arrayValue.reduce([], { (values, json) -> [T] in
@@ -22,6 +26,12 @@ class PaginatedResources<T: Resource>: Resource {
 
         self.count = count
         self.next = json["next"].string
+        if let url = URLComponents(string: self.next ?? ""),
+            let offset = url.queryItems?.first(where: { $0.name == "offset" }) {
+            self.offset = Int(offset.value ?? "0") ?? 0
+        }
+
+
         self.previous = json["previous"].string
         self.results = resultItems
     }

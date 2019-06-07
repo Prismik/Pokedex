@@ -75,6 +75,7 @@ extension BottomMenuAnimationController: UIViewControllerAnimatedTransitioning {
             let didCompleteTransition = !transitionContext.transitionWasCancelled
             listViewController.mainView.footer.isHidden = didCompleteTransition
             transitionContext.completeTransition(didCompleteTransition)
+            transitionContext.finishInteractiveTransition()
         })
     }
 
@@ -92,6 +93,7 @@ extension BottomMenuAnimationController: UIViewControllerAnimatedTransitioning {
             let didCompleteTransition = !transitionContext.transitionWasCancelled
             listViewController.mainView.footer.isHidden = !didCompleteTransition
             transitionContext.completeTransition(didCompleteTransition)
+            transitionContext.finishInteractiveTransition()
         })
     }
 }
