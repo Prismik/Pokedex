@@ -45,6 +45,7 @@ class PokemonListView: UIView {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
+        collectionView.contentInset = .vertical(headerHeight)
         collectionView.showsHorizontalScrollIndicator = false
         addSubview(collectionView)
 

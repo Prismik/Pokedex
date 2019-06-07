@@ -59,24 +59,39 @@ extension BottomMenuAnimationController: UIViewControllerAnimatedTransitioning {
         transitionContext.containerView.insertSubview(toViewController.view, belowSubview: fromViewController.view)
         guard let navigationViewController = fromViewController as? UINavigationController else { return }
         guard let listViewController = navigationViewController.topViewController as? PokemonListViewController else { return }
-        toViewController.view.frame = UIScreen.main.bounds
+        guard let menuViewController = toViewController as? BottomMenuViewController else { return }
+
         let targetYPosition = listViewController.mainView.maxY * MenuHelper.menuWidth
-        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
-            listViewController.mainView.footer.pin.bottom(targetYPosition)
+        let footerView = listViewController.mainView.footer
+        let menuContentView = menuViewController.mainView
+
+        menuContentView.pin.below(of: footerView).marginTop(-footerView.height).height(footerView.height)
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+            footerView.pin.bottom(targetYPosition)
+            let menuHeight: CGFloat = listViewController.view.height - footerView.minY
+            menuViewController.view.pin.horizontally().bottom().height(menuHeight)
+            menuContentView.pin.bottom().horizontally().height(menuHeight)
         }, completion: { _ in
-            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            let didCompleteTransition = !transitionContext.transitionWasCancelled
+            listViewController.mainView.footer.isHidden = didCompleteTransition
+            transitionContext.completeTransition(didCompleteTransition)
         })
     }
 
     private func dismiss(from fromViewController: UIViewController, to toViewController: UIViewController, using transitionContext: UIViewControllerContextTransitioning) {
-        guard let navigationViewController = fromViewController as? UINavigationController else { return }
+        guard let navigationViewController = toViewController as? UINavigationController else { return }
         guard let listViewController = navigationViewController.topViewController as? PokemonListViewController else { return }
+        guard let menuViewController = fromViewController as? BottomMenuViewController else { return }
 
-        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-            listViewController.mainView.footer.pin.bottom(0)
+        let footerView = listViewController.mainView.footer
+        let menuContentView = menuViewController.mainView
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+            footerView.pin.bottom(0)
+            menuContentView.pin.below(of: footerView).marginTop(-footerView.height)
         }, completion: { _ in
-            let didTransitionComplete = !transitionContext.transitionWasCancelled
-            transitionContext.completeTransition(didTransitionComplete)
+            let didCompleteTransition = !transitionContext.transitionWasCancelled
+            listViewController.mainView.footer.isHidden = !didCompleteTransition
+            transitionContext.completeTransition(didCompleteTransition)
         })
     }
 }

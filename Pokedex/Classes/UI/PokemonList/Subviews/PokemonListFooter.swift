@@ -15,11 +15,13 @@ class PokemonListFooter: UIView {
     init() {
         super.init(frame: .zero)
 
+        tintColor = UIColor.pokedexRed
+
         handle.layer.cornerRadius = 2
         handle.backgroundColor = UIColor.black.withAlphaComponent(0.2)
         addSubview(handle)
 
-        shapeLayer.fillColor = UIColor.pokedexRed.cgColor
+        shapeLayer.fillColor = tintColor.cgColor
         layer.insertSublayer(shapeLayer, at: 0)
 
         layer.shadowColor = UIColor.pokedexRed.cgColor

@@ -24,6 +24,6 @@ class TaskFactory {
     }
 
     func remove(_ task: AsyncTask) {
-
+        tasks.removeValue(forKey: task.id.uuidString)
     }
 }

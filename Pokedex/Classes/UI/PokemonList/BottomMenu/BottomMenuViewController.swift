@@ -22,6 +22,15 @@ class BottomMenuViewController: UIViewController {
 
     override func loadView() {
         let view = BottomMenuView()
+        view.delegate = self
         self.view = view
+    }
+}
+
+extension BottomMenuViewController: BottomMenuViewDelegate {
+    func didPan(_ progress: CGFloat, state: UIGestureRecognizerState) {
+        MenuHelper.mapGestureStateToInteractor(gestureState: state, progress: progress, interactor: interactor, presenting: false) {
+            delegate?.bottomMenuViewControllerDidDismiss(self)
+        }
     }
 }

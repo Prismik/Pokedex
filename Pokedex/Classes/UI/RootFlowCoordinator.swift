@@ -17,6 +17,8 @@ class RootFlowCoordinator: BaseFlowCoordinator {
         super.init()
         mainViewController.delegate = self
         mainViewController.interactor = interactor
+        mainViewController.transitioningDelegate = self
+        mainViewController.modalPresentationStyle = .custom
     }
 
     func start(in window: UIWindow) {

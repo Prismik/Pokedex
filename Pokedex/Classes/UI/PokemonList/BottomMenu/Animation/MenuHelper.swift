@@ -17,7 +17,7 @@ enum Direction {
 
 struct MenuHelper {
     static let menuWidth: CGFloat = 0.2
-    static let percentThreshold: CGFloat = 0.15
+    static let percentThreshold: CGFloat = 0.1
 
     static func progress(translationInView: CGPoint, viewBounds: CGRect, direction: Direction) -> CGFloat {
         let pointOnAxis: CGFloat
