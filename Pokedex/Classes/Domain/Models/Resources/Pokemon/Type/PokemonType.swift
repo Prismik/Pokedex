@@ -14,41 +14,41 @@ class PokemonType: Resource {
     var color: UIColor {
         switch type.name.lowercased() {
         case "normal":
-            return UIColor.normal
+            return UIColor.PokemonType.normal
         case "fire":
-            return UIColor.fire
+            return UIColor.PokemonType.fire
         case "water":
-            return UIColor.water
+            return UIColor.PokemonType.water
         case "electric":
-            return UIColor.electric
+            return UIColor.PokemonType.electric
         case "grass":
-            return UIColor.grass
+            return UIColor.PokemonType.grass
         case "ice":
-            return UIColor.ice
+            return UIColor.PokemonType.ice
         case "fighting":
-            return UIColor.fighting
+            return UIColor.PokemonType.fighting
         case "poison":
-            return UIColor.poison
+            return UIColor.PokemonType.poison
         case "ground":
-            return UIColor.ground
+            return UIColor.PokemonType.ground
         case "flying":
-            return UIColor.flying
+            return UIColor.PokemonType.flying
         case "psychic":
-            return UIColor.psychic
+            return UIColor.PokemonType.psychic
         case "bug":
-            return UIColor.bug
+            return UIColor.PokemonType.bug
         case "rock":
-            return UIColor.rock
+            return UIColor.PokemonType.rock
         case "ghost":
-            return UIColor.ghost
+            return UIColor.PokemonType.ghost
         case "dragon":
-            return UIColor.dragon
+            return UIColor.PokemonType.dragon
         case "dark":
-            return UIColor.dark
+            return UIColor.PokemonType.dark
         case "steel":
-            return UIColor.steel
+            return UIColor.PokemonType.steel
         case "fairy":
-            return UIColor.fairy
+            return UIColor.PokemonType.fairy
         default:
             return .white
         }

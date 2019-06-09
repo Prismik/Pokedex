@@ -18,6 +18,7 @@ class Pokemon: Resource {
     let sprite: Sprite
     let species: NamedResource<PokemonSpecies>
     let types: [PokemonType]
+    let stats: [PokemonStat]
 
     var mainColor: UIColor? {
         return types.last?.color
@@ -45,6 +46,10 @@ class Pokemon: Resource {
             return PokemonType(json: type)
         })
 
+        let stats: [PokemonStat] = json["stats"].arrayValue.compactMap({ stat -> PokemonStat? in
+            return PokemonStat(json: stat)
+        })
+
         self.id = id
         self.name = name
         self.baseExperience = baseXp
@@ -54,5 +59,6 @@ class Pokemon: Resource {
         self.sprite = Sprite(json: json["sprites"])
         self.species = species
         self.types = types
+        self.stats = stats
     }
 }

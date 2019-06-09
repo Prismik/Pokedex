@@ -14,6 +14,7 @@ class PokemonDetailsView: UIView {
     private let imageView = UIImageView()
     private let abilitiesView = UIView()
     private let movesView = UIView()
+    private let statsView = StatsView()
     init(pokemon: Pokemon) {
         self.pokemon = pokemon
         super.init(frame: .zero)
@@ -23,8 +24,13 @@ class PokemonDetailsView: UIView {
         }
 
         addSubview(imageView)
-
+        addSubview(statsView)
         backgroundColor = .white
+
+        let stats: [StatViewData] = pokemon.stats.map({
+            return StatViewData(value: $0.baseValue, name: $0.stat.name, color: .pokedexRed)
+        })
+        statsView.configure(stats: stats)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -37,5 +43,12 @@ class PokemonDetailsView: UIView {
         })
 
         setNeedsLayout()
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        imageView.pin.top(20).hCenter().size(75)
+        statsView.pin.bottom(20).width(width * 0.6).height(width * 0.6).hCenter()
     }
 }
