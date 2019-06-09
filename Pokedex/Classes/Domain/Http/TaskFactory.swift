@@ -9,7 +9,7 @@
 import Foundation
 
 class TaskFactory {
-    private var tasks: [String: AsyncTask] = [:]
+    private var tasks: [String: AsyncTask<Any>] = [:]
 
     static var shared = TaskFactory()
 
@@ -17,13 +17,13 @@ class TaskFactory {
 
     }
     
-    func makeAsync() -> AsyncTask {
-        let task = AsyncTask(uuid: UUID())
-        tasks[task.id.uuidString] = task
+    func makeAsync<T: Any>(resource: T.Type) -> AsyncTask<T> {
+        let task = AsyncTask<T>(uuid: UUID())
+        tasks[task.id.uuidString] = task as? AsyncTask<Any>
         return task
     }
 
-    func remove(_ task: AsyncTask) {
+    func remove<T>(_ task: AsyncTask<T>) {
         tasks.removeValue(forKey: task.id.uuidString)
     }
 }

@@ -22,16 +22,16 @@ class NamedResource<T: Resource>: Resource {
         self.resource = nil
     }
 
-    @discardableResult func fetch() -> AsyncTask {
+    @discardableResult func fetch() -> AsyncTask<T> {
         if let resource = resource {
-            let task = TaskFactory.shared.makeAsync()
+            let task = TaskFactory.shared.makeAsync(resource: T.self)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
                 task.didSucceed?(resource)
             })
             return task
         } else {
             guard let resourceUrl = URL(string: url) else { return AsyncTask() }
-            let task = TaskFactory.shared.makeAsync()
+            let task = TaskFactory.shared.makeAsync(resource: T.self)
             Http.request(url: resourceUrl) { (response) in
                 switch response {
                 case .success(let data):

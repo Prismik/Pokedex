@@ -27,26 +27,22 @@ class Pokemon: Resource {
         guard let id = json["id"].int else { return nil }
         guard let name = json["name"].string else { return nil }
         guard let baseXp = json["base_experience"].int else { return nil }
-        let abilities: [PokemonAbility] = json["abilities"].arrayValue.reduce([], { (values, json) -> [PokemonAbility] in
-            let ability = PokemonAbility(json: json)
-            return ability == nil ? values : values + [ability!]
+        let abilities: [PokemonAbility] = json["abilities"].arrayValue.compactMap({
+            return PokemonAbility(json: $0)
         })
 
-        let forms: [NamedResource<Form>] = json["forms"].arrayValue.reduce([], { (values, json) -> [NamedResource<Form>] in
-            let form = NamedResource<Form>(json: json)
-            return form == nil ? values : values + [form!]
+        let forms: [NamedResource<Form>] = json["forms"].arrayValue.compactMap({ form -> NamedResource<Form>? in
+            return NamedResource<Form>(json: form)
         })
 
-        let moves: [PokemonMove] = json["moves"].arrayValue.reduce([], { (values, json) -> [PokemonMove] in
-            let move = PokemonMove(json: json)
-            return move == nil ? values : values + [move!]
+        let moves: [PokemonMove] = json["moves"].arrayValue.compactMap({ move -> PokemonMove? in
+            return PokemonMove(json: move)
         })
 
         guard let species = NamedResource<PokemonSpecies>(json: json["species"]) else { return nil }
 
-        let types: [PokemonType] = json["types"].arrayValue.reduce([], { (values, json) -> [PokemonType] in
-            let pokemonType = PokemonType(json: json)
-            return pokemonType == nil ? values : values + [pokemonType!]
+        let types: [PokemonType] = json["types"].arrayValue.compactMap({ type -> PokemonType? in
+            return PokemonType(json: type)
         })
 
         self.id = id

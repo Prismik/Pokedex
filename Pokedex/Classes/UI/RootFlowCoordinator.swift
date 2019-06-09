@@ -38,6 +38,11 @@ extension RootFlowCoordinator: PokemonListViewControllerDelegate {
 
         listViewController.present(menuViewController, animated: true, completion: nil)
     }
+
+    func pokemonListViewController(_ listViewController: PokemonListViewController, didPresentDetail pokemon: Pokemon) {
+        let viewController = PokemonDetailsViewController(pokemon: pokemon)
+        listViewController.navigationController?.pushViewController(viewController, animated: true)
+    }
 }
 
 extension RootFlowCoordinator: BottomMenuViewControllerDelegate {

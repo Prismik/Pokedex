@@ -29,4 +29,22 @@ class PokemonDetailsViewController: UIViewController {
         let detailsView = PokemonDetailsView(pokemon: pokemon)
         self.view = detailsView
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        let group = DispatchGroup()
+        pokemon.moves.forEach({
+            group.enter()
+            $0.move.fetch().onSuccess({ (_) in
+                group.leave()
+            }).onFailure({(_) in
+                group.leave()
+            })
+        })
+
+        group.notify(queue: .main, execute: { [weak self] in
+            self?.mainView.didUpdateMoves()
+        })
+    }
 }

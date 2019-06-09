@@ -10,6 +10,7 @@ import UIKit
 
 protocol PokemonListViewControllerDelegate: class {
     func pokemonListViewControllerDidPresentBottomMenu(_ listViewController: PokemonListViewController)
+    func pokemonListViewController(_ listViewController: PokemonListViewController, didPresentDetail pokemon: Pokemon)
 }
 
 class PokemonListViewController: UIViewController {
@@ -92,7 +93,7 @@ extension PokemonListViewController: PokemonListViewDelegate {
 
     func fetchDetails(for resource: NamedResource<Pokemon>, handler: @escaping (Pokemon) -> Void) {
         resource.fetch().onSuccess({ (data) in
-            guard let pokemon = data as? Pokemon else { return }
+            guard let pokemon = data else { return }
             handler(pokemon)
         }).onFailure({ (error) in
             print("woops")
@@ -101,8 +102,7 @@ extension PokemonListViewController: PokemonListViewDelegate {
 
     func showSpeciesDetails(for pokemon: NamedResource<Pokemon>) {
         guard let details = pokemon.resource else { return }
-        let viewController = PokemonDetailsViewController(pokemon: details)
-        navigationController?.pushViewController(viewController, animated: true)
+        delegate?.pokemonListViewController(self, didPresentDetail: details)
     }
 
     func didPan(_ progress: CGFloat, state: UIGestureRecognizerState) {

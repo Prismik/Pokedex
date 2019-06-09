@@ -8,11 +8,10 @@
 
 import Foundation
 
-class AsyncTask {
-    weak var owner: TaskFactory?
+class AsyncTask<T> {
     var id: UUID
 
-    private(set) var didSucceed: ((_ data: Any?) -> Void)?
+    private(set) var didSucceed: ((_ data: T?) -> Void)?
     private(set) var didFail: ((_ error: NSError) -> Void)?
 
     init(uuid: UUID) {
@@ -23,9 +22,9 @@ class AsyncTask {
         self.init(uuid: UUID())
     }
 
-    func onSuccess(_ handler: @escaping (_ data: Any?) -> Void) -> AsyncTask {
-        self.didSucceed = { (_ data: Any?) in
-            self.owner?.remove(self)
+    func onSuccess(_ handler: @escaping (_ data: T?) -> Void) -> AsyncTask {
+        self.didSucceed = { (_ data: T?) in
+            TaskFactory.shared.remove(self)
             handler(data)
         }
         return self
@@ -33,7 +32,7 @@ class AsyncTask {
 
     func onFailure(_ handler: @escaping (_ error: NSError) -> Void) -> AsyncTask {
         self.didFail = { (_ error: NSError) in
-            self.owner?.remove(self)
+            TaskFactory.shared.remove(self)
             handler(error)
         }
         return self
